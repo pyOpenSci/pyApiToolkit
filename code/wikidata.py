@@ -39,22 +39,30 @@ def write_item():
 	wd_item = wdi_core.WDItemEngine(item_name='<your_item_name>', domain='genes', data=[entrez_gene_id])
 	wd_item.write(login_instance)
 
+def save_to_files(data, rootFolder):
+	for item in data:
+		sm.save_to_json(data[item], rootFolder+'/data/raw/json/wikidata_'+item+'.json')
+
 ###    MAIN   ###
 
 if __name__ == "__main__":
-	rootFolder = sm.get_root_folder()
+	startTime = sm.start_timer()
 
+	rootFolder = sm.get_root_folder()
 	config = include.data['wikidata']
 	sm.setup_environment()
-	startTime = sm.start_timer()
+	data = {}
 
 	# wikidata API
 	login(config['user'], config['password'])
-	item = 'Q5'
-	results = query_item(item)
-	data = get_data(results)
+	
+	df = sm.open_csv(rootFolder+'/data/raw/csv/wikidata.csv')
 
-	sm.save_to_json(data, rootFolder+'/data/raw/json/wikidata.json')
+	for item in df['item']:
+		results = query_item(item)
+		data[item] = get_data(results)
+
+	save_to_files(data, rootFolder)
 
 	#sm.create_sqlite3_db(rootFolder+'/data/sqlite3/wikidata.db')
 

@@ -11,6 +11,7 @@ import csv
 import sqlite3
 import sys
 import xml.etree.ElementTree as ET
+import pandas as pd
 from datetime import datetime
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.exc import SQLAlchemyError
@@ -50,7 +51,7 @@ def save_to_file(data, filename):
 		filename: string of the filepath.
 	"""
 	try:
-		f = open('filename', 'w')
+		f = open(filename, 'w')
 		text_file = open(filename, "w")
 		text_file.write(data)
 		text_file.close()
@@ -111,9 +112,11 @@ def request_query(query):
 
 	return resp.json()
 
-def read_csv(filename, delimiter=',', newline='', quotechar='"'):
-	data = csv.DictReader(open(filename, newline=newline), delimiter=delimiter, quotechar=quotechar)
-	return data
+def open_csv(filename):
+	data = []
+	df = pd.read_csv(filename)
+	
+	return df
 
 # sqlalchemy http://pythoncentral.io/introductory-tutorial-python-sqlalchemy/
 # http://docs.sqlalchemy.org/en/rel_1_1/

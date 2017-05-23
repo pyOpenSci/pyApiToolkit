@@ -25,24 +25,34 @@ TS = sm.get_timestring()
 
 ###    FUNCTIONS   ###
 
+def request_dois(dois):
+	data = {}
+
+	for doi in dois:
+		data[doi] = sm.request_query(baseUrl+doi+'?email='+config['email'])
+	return data
+
+def save_to_files(data, rootFolder):
+	i = 0
+	for id in data:
+		sm.save_to_json(data[id], rootFolder+'/data/raw/json/oadoi_'+str(i)+'.json')
+		i+=1
+
 ###    MAIN   ###
 
 if __name__ == "__main__":
-	rootFolder = sm.get_root_folder()
-
-	config = include.data['oadoi']
-	
-	sm.setup_environment()
 	startTime = sm.start_timer()
 
-	# oadoi API
+	rootFolder = sm.get_root_folder()
 	baseUrl = 'https://api.oadoi.org/'
-	doi = '10.1038/nature12873'
+	config = include.data['oadoi']
+	sm.setup_environment()
 
-	data = sm.request_query(baseUrl+doi+'?email='+config['email'])
+	df = sm.open_csv(rootFolder+'/data/raw/csv/oadoi.csv')
+	
+	# oadoi API
+	data = request_dois(df['doi'])
 
-	print(data)
-
-	sm.save_to_json(data, rootFolder+'/data/raw/json/oadoi.json')
+	save_to_files(data, rootFolder)
 	
 	sm.stop_timer(startTime)

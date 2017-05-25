@@ -4,7 +4,7 @@
 """
 """
 
-import scholmine as sm
+import pyApiToolkit as at
 import os
 from wikidataintegrator import wdi_core, wdi_login
 import include
@@ -20,7 +20,7 @@ __status__ = "Development" # 'Development', 'Production' or 'Prototype'
 ###    GLOBAL   ###
 
 DELAY_TIME = 5 # in seconds
-TS = sm.get_timestring()
+TS = at.get_timestring()
 # TS = '2015-10-28-14-59'
 
 ###    FUNCTIONS   ###
@@ -41,22 +41,22 @@ def write_item():
 
 def save_to_files(data, rootFolder):
 	for item in data:
-		sm.save_to_json(data[item], rootFolder+'/data/raw/json/wikidata_'+item+'.json')
+		at.save_to_json(data[item], rootFolder+'/data/raw/json/wikidata_'+item+'.json')
 
 ###    MAIN   ###
 
 if __name__ == "__main__":
-	startTime = sm.start_timer()
+	startTime = at.start_timer()
 
-	rootFolder = sm.get_root_folder()
+	rootFolder = at.get_root_folder()
 	config = include.data['wikidata']
-	sm.setup_environment()
+	at.setup_environment()
 	data = {}
 
 	# wikidata API
 	login(config['user'], config['password'])
 	
-	df = sm.open_csv(rootFolder+'/data/raw/csv/wikidata.csv')
+	df = at.open_csv(rootFolder+'/data/raw/csv/wikidata.csv')
 
 	for item in df['item']:
 		results = query_item(item)
@@ -64,6 +64,6 @@ if __name__ == "__main__":
 
 	save_to_files(data, rootFolder)
 
-	#sm.create_sqlite3_db(rootFolder+'/data/sqlite3/wikidata.db')
+	#at.create_sqlite3_db(rootFolder+'/data/sqlite3/wikidata.db')
 
-	sm.stop_timer(startTime)
+	at.stop_timer(startTime)

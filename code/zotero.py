@@ -7,7 +7,7 @@ https://www.zotero.org/support/dev/client_coding/javascript_api
 http://pyzotero.readthedocs.io/en/latest/
 """
 
-import scholmine as sm
+import pyApiToolkit as at
 import os
 from pyzotero import zotero
 import include
@@ -23,7 +23,7 @@ __status__ = "Development" # 'Development', 'Production' or 'Prototype'
 ###    GLOBAL   ###
 
 DELAY_TIME = 5 # in seconds
-TS = sm.get_timestring()
+TS = at.get_timestring()
 # TS = '2015-10-28-14-59'
 
 ###    FUNCTIONS   ###
@@ -31,11 +31,11 @@ TS = sm.get_timestring()
 ###    MAIN   ###
 
 if __name__ == "__main__":
-	startTime = sm.start_timer()
+	startTime = at.start_timer()
 
-	rootFolder = sm.get_root_folder()
+	rootFolder = at.get_root_folder()
 	config = include.data['zotero']
-	sm.setup_environment()
+	at.setup_environment()
 	data = {}
 
 	# zotero API
@@ -47,4 +47,4 @@ if __name__ == "__main__":
 	for item in items:
 	    print(item['data'])
 	
-	sm.stop_timer(startTime)
+	at.stop_timer(startTime)

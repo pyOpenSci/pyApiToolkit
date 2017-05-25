@@ -6,18 +6,18 @@
 
 import requests	
 import json
-import os
 import csv
-import sqlite3
+import os
 import sys
-import xml.etree.ElementTree as ET
+import sqlite3
 import pandas as pd
 from datetime import datetime
-from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-from sqlalchemy import create_engine
+#import xml.etree.ElementTree as ET
+#from sqlalchemy import Column, ForeignKey, Integer, String
+#from sqlalchemy.exc import SQLAlchemyError
+#from sqlalchemy.ext.declarative import declarative_base
+#from sqlalchemy.orm import relationship
+#from sqlalchemy import create_engine
 
 
 def get_root_folder():

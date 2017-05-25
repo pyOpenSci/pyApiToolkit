@@ -2,7 +2,17 @@
 # -*- coding: utf-8 -*-
 
 import requests	
-import scholmine as sm
+import pyApiToolkit as at
+
+__author__ = "Stefan Kasberger"
+__copyright__ = "Copyright 2017"
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Stefan Kasberger"
+__email__ = "mail@stefankasberger.at"
+__status__ = "Development" # 'Development', 'Production' or 'Prototype'
+
+###    GLOBAL   ###
 
 BASE_URL = 'http://pub.orcid.org/'
 API_VERSION = 'v1.1/'
@@ -67,22 +77,22 @@ def request_ids(orcidIds):
 def save_to_file(data, datatype):
 	if datatype	== 'xml':
 		for id in data:
-			sm.save_to_file(data[id], rootFolder+'/data/raw/xml/orcid_'+id+'.xml')
+			at.save_to_file(data[id], rootFolder+'/data/raw/xml/orcid_'+id+'.xml')
 
 # main
 if __name__ == '__main__':
-	startTime = sm.start_timer()
+	startTime = at.start_timer()
 	data = {}
-	rootFolder = sm.get_root_folder()
+	rootFolder = at.get_root_folder()
 	datatype = 'xml'
 	baseUrl = 'http://pub.orcid.org/'
-	sm.setup_environment()
+	at.setup_environment()
 
-	df = sm.open_csv(rootFolder+'/data/raw/csv/orcid.csv')
+	df = at.open_csv(rootFolder+'/data/raw/csv/orcid.csv')
 
 	#read_csv
 	data = request_ids(df['orcid_id'])
 
 	save_to_file(data, datatype)
 
-	sm.stop_timer(startTime)
+	at.stop_timer(startTime)

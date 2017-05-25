@@ -3,13 +3,17 @@ Python 3 scripts to access, create, distribute and publish open research data or
 
 **Requirements**
 - Pandas
-- include.py: this is a config file, where you store your personal information in a dictionaries. See more details at the specific wrappers on how to use this.
+
+
+**include.py**
+
+This is a config file, where you store your personal information in a dictionaries. See more details at the specific wrappers on how to use this. This is the main part of the toolkit, where the used functionalities are developed in.
 
 ## pyApiToolkit.py
 
 Basic functionalities, which are used by the other scripts listed further below.
 
-## Wrapper
+## API Wrapper
 
 ### oadoi.py
 
@@ -17,13 +21,13 @@ Python wrapper to access the [oadoi.org API](https://oadoi.org/api).
 
 **include.py**
 
-´´´
+```
 data = {
 	'oadoi': {
 		'email': 'EMAIL'
 	}
 }
-´´´
+```
 
 ### wikidata.py
 Python wrapper to access the [wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) API via the [wikidataintegrator](https://github.com/SuLab/WikidataIntegrator) module (must be installed to work).
@@ -32,14 +36,14 @@ You have to have a wikidata account for this.
 
 **include.py**
 
-´´´
+```
 data = {
 	'wikidata': {
 		'user': 'USERNAME',
 		'password': 'PASSWORD'
 	}
 }
-´´´
+```
 
 ### orcid.py
 Python wrapper to access the [ORCID](https://orcid.org/) API.
@@ -50,14 +54,14 @@ Wrapper for the [Zotero API](https://www.zotero.org/support/dev/client_coding/ja
 
 **include.py**
 
-´´´
+```
 data = {
 	'zotero': {
 		'apiKey': 'API_KEY',
 		'zoteroID': 'ZOTEROID'
 	}
 }
-´´´
+```
 
 ### doaj.py
 Wrapper to access the [Digital Open Access Journal API](https://doaj.org/api/v1/docs).

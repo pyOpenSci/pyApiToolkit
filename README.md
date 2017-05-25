@@ -1,4 +1,4 @@
-# Scholarly Mining
+# Python Open Science API toolkit
 Python scripts to access, create, distribute and publish open data of scholarly literature to use it for text data mining.
 
 ## scholmine.py
